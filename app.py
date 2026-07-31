@@ -97,9 +97,13 @@ EVENT = {
     "map_url": "https://yandex.uz/maps/-/CTvQMQ~r",
 }
 
-# ------------------------------------------------------------------
-#  ВСПОМОГАТЕЛЬНЫЕ ФУНКЦИИ
-# ------------------------------------------------------------------
+OG_DESCRIPTION = (
+    "Любовь привела нас к этому дню, и мы будем счастливы, если вы "
+    "разделите его вместе с нами. Пусть этот праздник станет еще теплее "
+    "благодаря вашему присутствию."
+)
+
+
 def load_responses():
     if not os.path.exists(DATA_FILE):
         return []
@@ -172,7 +176,9 @@ def set_language(lang_code):
 def index():
     lang = session.get("lang", "ru")
     t = TRANSLATIONS[lang]
-    return render_template("index.html", event=EVENT, t=t, current_lang=lang)
+    return render_template(
+    "index.html", event=EVENT, t=t, current_lang=lang, og_description=OG_DESCRIPTION
+)
 
 
 @app.route("/rsvp", methods=["POST"])
