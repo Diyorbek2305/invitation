@@ -5,6 +5,16 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{{ t.groom }} &amp; {{ t.bride }} — {{ t.date_human_day }} {{ t.date_human_month }} {{ t.date_human_year
         }}</title>
+
+    <!-- ===== Превью ссылки в Telegram / WhatsApp / соцсетях (Open Graph) ===== -->
+    <meta property="og:title" content="{{ t.groom }} &amp; {{ t.bride }}">
+    <meta property="og:description" content="{{ t.invitation_text }}">
+    <meta property="og:image" content="{{ url_for('static', filename='og-image.jpg', _external=True) }}">
+    <meta property="og:url" content="{{ request.url }}">
+    <meta property="og:type" content="website">
+    <meta name="twitter:card" content="summary_large_image">
+    <!-- ======================================================================= -->
+
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,500&family=EB+Garamond:wght@400;500&family=Montserrat:wght@300;400&display=swap"
           rel="stylesheet">
