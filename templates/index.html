@@ -6,14 +6,14 @@
     <title>{{ t.groom }} &amp; {{ t.bride }} — {{ t.date_human_day }} {{ t.date_human_month }} {{ t.date_human_year
         }}</title>
 
-    <!-- ===== Превью ссылки в Telegram / WhatsApp / соцсетях (Open Graph) ===== -->
+ 
     <meta property="og:title" content="{{ t.groom }} &amp; {{ t.bride }}">
     <meta property="og:description" content="{{ t.invitation_text }}">
-    <meta property="og:image" content="{{ url_for('static', filename='og-image.jpg', _external=True) }}">
+    <meta property="og:image" content="{{ url_for('static', filename='og-image.png', _external=True) }}">
     <meta property="og:url" content="{{ request.url }}">
     <meta property="og:type" content="website">
     <meta name="twitter:card" content="summary_large_image">
-    <!-- ======================================================================= -->
+ 
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,500&family=EB+Garamond:wght@400;500&family=Montserrat:wght@300;400&display=swap"
@@ -23,7 +23,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Pinyon+Script&display=swap" rel="stylesheet">
 
     <style>
-        /* Стили для переключателя языков */
+        
         .lang-switch {
             position: fixed;
             top: 15px;
@@ -55,7 +55,7 @@
             color: #ccc;
         }
 
-        /* Выравнивание имён друг под другом */
+      
         .hero-names.stacked {
             display: flex;
             flex-direction: column;
@@ -74,14 +74,14 @@
 </head>
 <body>
 
-<!-- ================= LANG SWITCHER ================= -->
+
 <div class="lang-switch">
     <a href="/lang/ru" class="lang-btn {% if current_lang == 'ru' or not current_lang %}active{% endif %}">RU</a>
     <span class="lang-divider">|</span>
     <a href="/lang/uz" class="lang-btn {% if current_lang == 'uz' %}active{% endif %}">UZ</a>
 </div>
 
-<!-- ================= HERO ================= -->
+
 <section class="hero">
     <span class="eyebrow">Save the date</span>
     <h1 class="hero-names stacked">
@@ -94,7 +94,7 @@
     <div class="scroll-cue"><span>Scroll</span><span class="line"></span></div>
 </section>
 
-<!-- ================= INVITATION ================= -->
+
 <section class="section reveal">
     <div class="container">
         <span class="eyebrow">{% if current_lang == 'uz' %}Qadrli mehmonlar{% else %}Дорогие гости{% endif %}</span>
@@ -111,7 +111,7 @@
     </div>
 </section>
 
-<!-- ================= COUNTDOWN ================= -->
+
 <section class="section section--wine reveal">
     <div class="container">
         <span class="eyebrow">{{ t.countdown_title }}</span>
@@ -176,7 +176,7 @@
     </div>
 </section>
 
-<!-- ================= TIMING ================= -->
+
 <section class="section reveal">
     <div class="container">
         <span class="eyebrow">{% if current_lang == 'uz' %}Dastur{% else %}План вечера{% endif %}</span>
@@ -227,7 +227,7 @@
     </div>
 </section>
 
-<!-- ================= RSVP ================= -->
+
 <section class="section reveal" id="rsvp">
     <div class="container">
         <span class="eyebrow">{% if current_lang == 'uz' %}Javobingiz{% else %}Ваш ответ{% endif %}</span>
@@ -273,7 +273,7 @@
     </div>
 </section>
 
-<!-- ================= FOOTER ================= -->
+
 <footer class="footer">
     <div class="names">{{ t.groom }} &amp; {{ t.bride }}</div>
     <div>{{ t.date_human_day }} · {{ t.date_human_month }} · {{ t.city }}</div>
