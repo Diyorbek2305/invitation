@@ -1,0 +1,277 @@
+<!doctype html>
+<html lang="{{ current_lang }}">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ t.groom }} &amp; {{ t.bride }} — {{ t.date_human_day }} {{ t.date_human_month }} {{ t.date_human_year
+        }}</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,500&family=EB+Garamond:wght@400;500&family=Montserrat:wght@300;400&display=swap"
+          rel="stylesheet">
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Pinyon+Script&display=swap" rel="stylesheet">
+
+    <style>
+        /* Стили для переключателя языков */
+        .lang-switch {
+            position: fixed;
+            top: 15px;
+            right: 15px;
+            z-index: 9999;
+            background: rgba(255, 255, 255, 0.85);
+            backdrop-filter: blur(8px);
+            padding: 6px 14px;
+            border-radius: 20px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.12);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-family: 'Montserrat', sans-serif;
+            font-size: 0.85rem;
+            border: 1px solid rgba(0, 0, 0, 0.05);
+        }
+        .lang-btn {
+            text-decoration: none;
+            color: #888;
+            font-weight: 500;
+            transition: color 0.2s, font-weight 0.2s;
+        }
+        .lang-btn.active {
+            color: #111;
+            font-weight: 700;
+        }
+        .lang-divider {
+            color: #ccc;
+        }
+
+        /* Выравнивание имён друг под другом */
+        .hero-names.stacked {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            line-height: 1.1;
+        }
+        .hero-names.stacked .amp {
+            margin: 6px 0;
+            font-size: 0.7em;
+        }
+
+        .section .lede {
+        font-size: 1.1rem;
+        line-height: 1.5;}
+    </style>
+</head>
+<body>
+
+<!-- ================= LANG SWITCHER ================= -->
+<div class="lang-switch">
+    <a href="/lang/ru" class="lang-btn {% if current_lang == 'ru' or not current_lang %}active{% endif %}">RU</a>
+    <span class="lang-divider">|</span>
+    <a href="/lang/uz" class="lang-btn {% if current_lang == 'uz' %}active{% endif %}">UZ</a>
+</div>
+
+<!-- ================= HERO ================= -->
+<section class="hero">
+    <span class="eyebrow">Save the date</span>
+    <h1 class="hero-names stacked">
+        <span>{{ t.groom }}</span>
+        <span class="amp">&amp;</span>
+        <span>{{ t.bride }}</span>
+    </h1>
+    <p class="hero-date">{{ t.date_human_day }} · {{ t.date_human_month }} · {{ t.date_human_year }}</p>
+    <p class="hero-city">{{ t.city }}</p>
+    <div class="scroll-cue"><span>Scroll</span><span class="line"></span></div>
+</section>
+
+<!-- ================= INVITATION ================= -->
+<section class="section reveal">
+    <div class="container">
+        <span class="eyebrow">{% if current_lang == 'uz' %}Qadrli mehmonlar{% else %}Дорогие гости{% endif %}</span>
+        <h2 style="margin-top:14px;">{% if current_lang == 'uz' %}Taklifnoma{% else %}Приглашение{% endif %}</h2>
+        <div class="divider">
+            <span class="rule"></span>
+            <svg viewBox="0 0 24 24" fill="none">
+                <path d="M12 2 L14 10 L22 12 L14 14 L12 22 L10 14 L2 12 L10 10 Z" stroke="currentColor"
+                      stroke-width="1"/>
+            </svg>
+            <span class="rule"></span>
+        </div>
+        <p class="lede" style="font-size: 24px;">{{ t.invitation_text }}</p>
+    </div>
+</section>
+
+<!-- ================= COUNTDOWN ================= -->
+<section class="section section--wine reveal">
+    <div class="container">
+        <span class="eyebrow">{{ t.countdown_title }}</span>
+        <h2 style="margin-top:14px; color:var(--paper);">{{ t.countdown_subtitle }}</h2>
+        <div class="countdown" data-target="{{ event.date_iso }}">
+            <div class="unit">
+                <div class="num" data-unit="days">00</div>
+                <div class="lbl">{{ t.days }}</div>
+            </div>
+            <div class="unit">
+                <div class="num" data-unit="hours">00</div>
+                <div class="lbl">{{ t.hours }}</div>
+            </div>
+            <div class="unit">
+                <div class="num" data-unit="minutes">00</div>
+                <div class="lbl">{{ t.minutes }}</div>
+            </div>
+            <div class="unit">
+                <div class="num" data-unit="seconds">00</div>
+                <div class="lbl">{{ t.seconds }}</div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ================= DETAILS ================= -->
+<section class="section section--soft reveal">
+    <div class="container">
+        <span class="eyebrow">{% if current_lang == 'uz' %}Tafsilotlar{% else %}Детали{% endif %}</span>
+        <h2 style="margin-top:14px;">{% if current_lang == 'uz' %}Ma'lumot{% else %}Информация{% endif %}</h2>
+        <div class="info-grid">
+            <div class="info-card">
+                <svg viewBox="0 0 24 24" fill="none" stroke-width="1.4">
+                    <rect x="3" y="5" width="18" height="16" rx="1" stroke="currentColor"/>
+                    <path d="M3 9H21" stroke="currentColor"/>
+                    <path d="M8 3V7M16 3V7" stroke="currentColor"/>
+                </svg>
+                <h3>{% if current_lang == 'uz' %}Sana{% else %}Дата{% endif %}</h3>
+                <p>{{ t.date_human_day }} {{ t.date_human_month }}</p>
+                <p>{{ t.date_human_year }} · {{ t.date_human_weekday }}</p>
+            </div>
+            <div class="info-card">
+                <svg viewBox="0 0 24 24" fill="none" stroke-width="1.4">
+                    <circle cx="12" cy="12" r="9" stroke="currentColor"/>
+                    <path d="M12 7V12L15.5 14" stroke="currentColor"/>
+                </svg>
+                <h3>{% if current_lang == 'uz' %}Vaqt{% else %}Время{% endif %}</h3>
+                <p>18:00 — {% if current_lang == 'uz' %}mehmonlarni kutib olish{% else %}встреча гостей{% endif %}</p>
+                <p>18:30 — {% if current_lang == 'uz' %}tantananing boshlanishi{% else %}начало торжества{% endif %}</p>
+            </div>
+            <div class="info-card">
+                <svg viewBox="0 0 24 24" fill="none" stroke-width="1.4">
+                    <path d="M12 21C12 21 5 14.5 5 9.5C5 5.9 8.13 3 12 3C15.87 3 19 5.9 19 9.5C19 14.5 12 21 12 21Z"
+                          stroke="currentColor"/>
+                    <circle cx="12" cy="9.5" r="2.4" stroke="currentColor"/>
+                </svg>
+                <h3>{% if current_lang == 'uz' %}Joylashuv{% else %}Локация{% endif %}</h3>
+                <p>{{ t.venue_name }}</p>
+                <p>{{ t.venue_address }}</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ================= TIMING ================= -->
+<section class="section reveal">
+    <div class="container">
+        <span class="eyebrow">{% if current_lang == 'uz' %}Dastur{% else %}План вечера{% endif %}</span>
+        <h2 style="margin-top:14px;">{% if current_lang == 'uz' %}Vaqt rejalari{% else %}Тайминг{% endif %}</h2>
+        <div class="timeline">
+            <div class="timeline-item">
+                <div class="time">18:00</div>
+                <div class="dot"></div>
+                <div class="label">{% if current_lang == 'uz' %}Mehmonlarni kutib olish{% else %}Встреча гостей{% endif
+                    %}
+                </div>
+            </div>
+            <div class="timeline-item">
+                <div class="time">18:30</div>
+                <div class="dot"></div>
+                <div class="label">{% if current_lang == 'uz' %}Tantanali qismning boshlanishi{% else %}Начало
+                    торжественной части{% endif %}
+                </div>
+            </div>
+            <div class="timeline-item">
+                <div class="time">20:00</div>
+                <div class="dot"></div>
+                <div class="label">{% if current_lang == 'uz' %}Kechki ovqat va raqslar{% else %}Ужин и танцы{% endif
+                    %}
+                </div>
+            </div>
+            <div class="timeline-item">
+                <div class="time">22:30</div>
+                <div class="dot"></div>
+                <div class="label">{% if current_lang == 'uz' %}Bayramning yakunlanishi{% else %}Завершение праздника{%
+                    endif %}
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ================= LOCATION ================= -->
+<section class="section section--soft reveal">
+    <div class="container">
+        <span class="eyebrow">{{ t.where }}</span>
+        <h2 style="margin-top:14px;">{{ t.address_title }}</h2>
+        <img src="{{ url_for('static', filename='grand_shadel.png') }}"
+             alt="grand_shadel"
+             style="display: block; margin: 20px auto; width: 100%; max-width: 600px; height: auto; border-radius: 12px;">
+        <p class="lede">{{ t.venue_name }}<br>{{ t.venue_address }}</p>
+        <a class="map-button" href="{{ event.map_url }}" target="_blank" rel="noopener">{{ t.map_btn }}</a>
+    </div>
+</section>
+
+<!-- ================= RSVP ================= -->
+<section class="section reveal" id="rsvp">
+    <div class="container">
+        <span class="eyebrow">{% if current_lang == 'uz' %}Javobingiz{% else %}Ваш ответ{% endif %}</span>
+        <h2 style="margin-top:14px;">{{ t.rsvp_title }}</h2>
+
+        <form class="rsvp-card" id="rsvp-form">
+            <div class="field">
+                <label for="name">{% if current_lang == 'uz' %}Ismingiz{% else %}Ваше имя{% endif %}</label>
+                <input type="text" id="name" name="name" placeholder="{{ t.name_placeholder }}" required>
+            </div>
+
+            <div class="field">
+                <label>{% if current_lang == 'uz' %}Tashrif buyurasizmi?{% else %}Сможете прийти?{% endif %}</label>
+                <div class="radio-row">
+                    <label><input type="radio" name="attending" value="yes" checked> {{ t.attending_yes }}</label>
+                    <label><input type="radio" name="attending" value="no"> {{ t.attending_no }}</label>
+                </div>
+            </div>
+
+            <div class="field guests-field is-visible" id="guests-field">
+                <label for="guests">{{ t.guests_label }}</label>
+                <input type="number" id="guests" name="guests" min="1" max="10" value="1">
+            </div>
+
+            <div class="field">
+                <label for="wish">{% if current_lang == 'uz' %}Ezgu tilaklaringiz (ixtiyoriy){% else %}Пожелание
+                    молодожёнам (необязательно){% endif %}</label>
+                <textarea id="wish" name="wish" rows="3" placeholder="{{ t.wish_placeholder }}"></textarea>
+            </div>
+
+            <button type="submit" class="submit-btn">{{ t.send_btn }}</button>
+            <div class="form-msg" id="form-msg"></div>
+        </form>
+
+        <div class="thanks" id="thanks-block" style="display:none;">
+            <svg viewBox="0 0 24 24" fill="none">
+                <path d="M12 2 L14 10 L22 12 L14 14 L12 22 L10 14 L2 12 L10 10 Z" stroke="currentColor"
+                      stroke-width="1"/>
+            </svg>
+            <p>{% if current_lang == 'uz' %}Rahmat! Javobingiz qabul qilindi.{% else %}Спасибо! Ваш ответ получен.{%
+                endif %}</p>
+        </div>
+    </div>
+</section>
+
+<!-- ================= FOOTER ================= -->
+<footer class="footer">
+    <div class="names">{{ t.groom }} &amp; {{ t.bride }}</div>
+    <div>{{ t.date_human_day }} · {{ t.date_human_month }} · {{ t.city }}</div>
+    <div class="meta">© {{ t.date_human_year }} · {% if current_lang == 'uz' %}Barcha huquqlar hamda tilaklar
+        saqlangan{% else %}Все права защищены{% endif %}
+    </div>
+</footer>
+
+<script src="{{ url_for('static', filename='script.js') }}"></script>
+</body>
+</html>
